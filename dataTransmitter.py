@@ -15,6 +15,6 @@ client.on_connect = on_connect
 client.on_message = on_message
 client.connect("127.0.0.1", 1883, 60)
 
-client.subscribe("topic/test", qos=1)
+client.subscribe("dt/smoke", qos=1)
 
 client.loop_forever()
