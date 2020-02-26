@@ -2,7 +2,7 @@
 
 import subprocess
 
-files = ["movementSensor.py", "smokeSensor.py", "doorLockMechanism.py", "windowLockMechanism.py", "dataTransmitter.py"]
+files = ["movementSensor.py", "smokeSensor.py", "doorLockMechanism.py", "windowLockMechanism.py", "dataTransmitter.py", "heartRateMonitor.py"]
 
 script = 'python3 '+' & python3 '.join(files)
 
