@@ -2,9 +2,9 @@ import paho.mqtt.client as mqtt
 import random
 
 def on_message(client, userdata, message):
-    print("Message Recieved:"+message.payload.decode())
+    print(message.payload.decode())
     # Publishing to datatransmitter
-    client.publish("dt/heart_rate", "Heart rate: "+str(random.choice(hrList)))
+    client.publish("dt/heart_rate", "Heart rate: "+str(random.choice(hrList)) + " bpm")
 
 hrList = [70, 75, 80, 85, 90]
 

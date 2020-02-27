@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 
 def on_message(client, userdata, message):
-    print("Message Recieved: "+message.payload.decode())
+    print(message.payload.decode())
     # Publishing to datatransmitter
     client.publish("dt/window_lock", message.payload.decode())
 
