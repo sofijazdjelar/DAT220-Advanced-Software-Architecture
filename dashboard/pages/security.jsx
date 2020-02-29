@@ -1,39 +1,27 @@
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
 import Lock from "../components/lock";
 import Layout from "../components/layout";
+import Firebase from "../config";
 
-const doors = [
-  {
-    id: 1,
-    isOpen: false
-  },
-  {
-    id: 2,
-    isOpen: false
-  },
-  {
-    id: 3,
-    isOpen: true
-  }
-];
+const Security = () => {
+  const [locks, setLocks] = useState([]);
 
-const windows = [
-  ...doors,
-  {
-    id: 4,
-    isOpen: true
-  },
-  {
-    id: 5,
-    isOpen: true
-  },
-  {
-    id: 6,
-    isOpen: true
-  }
-];
+  useEffect(() => {
+    let ref = Firebase.database().ref("/dt");
+    ref.on(
+      "value",
+      snapshot => {
+        const data = snapshot.val();
+        console.log("data", data);
+        setLocks(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }, []);
 
-const Security = ({ data }) => {
   return (
     <Layout>
       <Container fluid style={{ marginTop: 16 }}>
@@ -42,13 +30,17 @@ const Security = ({ data }) => {
             <Card>
               <Card.Header as="h3">Doors</Card.Header>
               <Card.Body>
-                <Container>
-                  {doors.map(door => (
-                    <Row key={`door-${door.id}`}>
-                      <Lock type="Door" data={door} />
-                    </Row>
-                  ))}
-                </Container>
+                {locks.door_lock ? (
+                  <Container>
+                    {locks.door_lock?.map(door => (
+                      <Row key={`door-${door?.id}`}>
+                        <Lock type="Door" data={door} />
+                      </Row>
+                    ))}
+                  </Container>
+                ) : (
+                  <Spinner animation="grow" />
+                )}
               </Card.Body>
             </Card>
           </Col>
@@ -56,13 +48,17 @@ const Security = ({ data }) => {
             <Card>
               <Card.Header as="h3">Windows</Card.Header>
               <Card.Body>
-                <Container>
-                  {windows.map(window => (
-                    <Row key={`window-${window.id}`}>
-                      <Lock type="Window" data={window} />
-                    </Row>
-                  ))}
-                </Container>
+                {locks.window_lock ? (
+                  <Container>
+                    {locks.window_lock?.map(window => (
+                      <Row key={`window-${window?.id}`}>
+                        <Lock type="Window" data={window} />
+                      </Row>
+                    ))}
+                  </Container>
+                ) : (
+                  <Spinner animation="grow" />
+                )}
               </Card.Body>
             </Card>
           </Col>

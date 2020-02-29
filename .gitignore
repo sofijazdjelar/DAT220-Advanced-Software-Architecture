@@ -4,3 +4,4 @@ key.json
 # Frontend
 dashboard/node_modules
 dashboard/.next
+dashboard/config.js

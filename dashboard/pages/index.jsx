@@ -14,16 +14,4 @@ const Index = ({ shows }) => (
   </Layout>
 );
 
-// TODO: Connect to our API
-// Index.getInitialProps = async function() {
-//   const res = await fetch("");
-//   const data = await res.json();
-
-//   console.log(`Show data fetched. Count: ${data.length}`);
-
-//   return {
-//     shows: data.map(entry => entry.show)
-//   };
-// };
-
 export default Index;
