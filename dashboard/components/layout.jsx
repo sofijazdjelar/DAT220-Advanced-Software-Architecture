@@ -1,12 +1,10 @@
 import Header from "./header.jsx";
 
-const withLayout = Page => {
-  return () => (
-    <>
-      <Header />
-      <Page />
-    </>
-  );
-};
+const Layout = props => (
+  <>
+    <Header />
+    {props?.children}
+  </>
+);
 
-export default withLayout;
+export default Layout;
