@@ -5,12 +5,15 @@ const Header = () => {
   const router = useRouter();
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link href="/" title="ASsistant blabla">
-        <a class="navbar-brand">Ambient Assisted Living</a>
+    <nav
+      className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+      style={{ paddingTop: 16, paddingBottom: 16 }}
+    >
+      <Link href="/" title="Ambient Assisted Living">
+        <a className="navbar-brand">Ambient Assisted Living</a>
       </Link>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -18,28 +21,42 @@ const Header = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li class={`nav-item ${router.pathname === "/basic" && "active"}`}>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav mr-auto">
+          <li
+            className={`nav-item ${router.pathname === "/basic" && "active"}`}
+          >
             <Link href="/basic" title="Basic Information">
-              <a class="nav-link">Basic Information</a>
+              <a className="nav-link">Basic Information</a>
             </Link>
           </li>
-          <li class={`nav-item ${router.pathname === "/medical" && "active"}`}>
+          <li
+            className={`nav-item ${router.pathname === "/medical" && "active"}`}
+          >
             <Link href="/medical" title="Medical Information">
-              <a class="nav-link">Medical Information</a>
+              <a className="nav-link">Medical Information</a>
             </Link>
           </li>
-          <li class={`nav-item ${router.pathname === "/security" && "active"}`}>
+          <li
+            className={`nav-item ${router.pathname === "/security" &&
+              "active"}`}
+          >
             <Link href="/security" title="Security">
-              <a class="nav-link">Security</a>
+              <a className="nav-link">Security</a>
+            </Link>
+          </li>
+          <li
+            className={`nav-item ${router.pathname === "/photos" && "active"}`}
+          >
+            <Link href="/photos" title="Photos">
+              <a className="nav-link">Photo upload!</a>
             </Link>
           </li>
         </ul>
-        <div class="my-2 my-lg-0">
-          <button type="button" class="btn btn-outline-light">
+        <div className="my-2 my-lg-0">
+          <button type="button" className="btn btn-outline-light">
             Log in
           </button>
         </div>
