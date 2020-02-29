@@ -1,5 +1,37 @@
 import { Card, Container, Row, Col, Badge } from "react-bootstrap";
 import withLayout from "../components/layout";
+import Lock from "../components/lock";
+
+const doors = [
+  {
+    id: 1,
+    isOpen: false
+  },
+  {
+    id: 2,
+    isOpen: false
+  },
+  {
+    id: 3,
+    isOpen: true
+  }
+];
+
+const windows = [
+  ...doors,
+  {
+    id: 4,
+    isOpen: true
+  },
+  {
+    id: 5,
+    isOpen: true
+  },
+  {
+    id: 6,
+    isOpen: true
+  }
+];
 
 const Security = ({ data }) => (
   <Container fluid style={{ marginTop: 16 }}>
@@ -9,30 +41,11 @@ const Security = ({ data }) => (
           <Card.Header as="h3">Doors</Card.Header>
           <Card.Body>
             <Container>
-              <Row>
-                <div>
-                  Door 1:{" "}
-                  <Badge pill variant="primary">
-                    Open
-                  </Badge>
-                </div>
-              </Row>
-              <Row>
-                <div>
-                  Door 2:{" "}
-                  <Badge pill variant="secondary">
-                    Closed
-                  </Badge>
-                </div>
-              </Row>
-              <Row>
-                <div>
-                  Door 3:{" "}
-                  <Badge pill variant="secondary">
-                    Closed
-                  </Badge>
-                </div>
-              </Row>
+              {doors.map(door => (
+                <Row key={`door-${door.id}`}>
+                  <Lock type="Door" data={door} />
+                </Row>
+              ))}
             </Container>
           </Card.Body>
         </Card>
@@ -42,38 +55,11 @@ const Security = ({ data }) => (
           <Card.Header as="h3">Windows</Card.Header>
           <Card.Body>
             <Container>
-              <Row>
-                <div>
-                  Window 1:{" "}
-                  <Badge pill variant="primary">
-                    Open
-                  </Badge>
-                </div>
-              </Row>
-              <Row>
-                <div>
-                  Window 2:{" "}
-                  <Badge pill variant="secondary">
-                    Closed
-                  </Badge>
-                </div>
-              </Row>
-              <Row>
-                <div>
-                  Window 3:{" "}
-                  <Badge pill variant="secondary">
-                    Closed
-                  </Badge>
-                </div>
-              </Row>
-              <Row>
-                <div>
-                  Window 4:{" "}
-                  <Badge pill variant="secondary">
-                    Closed
-                  </Badge>
-                </div>
-              </Row>
+              {windows.map(window => (
+                <Row key={`window-${window.id}`}>
+                  <Lock type="Window" data={window} />
+                </Row>
+              ))}
             </Container>
           </Card.Body>
         </Card>
