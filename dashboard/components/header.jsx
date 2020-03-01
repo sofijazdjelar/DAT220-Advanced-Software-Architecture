@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Navbar } from "react-bootstrap";
 
 const Header = () => {
   const router = useRouter();
 
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="lg"
       style={{ paddingTop: 16, paddingBottom: 16 }}
     >
       <Link href="/">
@@ -14,18 +17,8 @@ const Header = () => {
           Ambient Assisted Living
         </a>
       </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
         <ul className="navbar-nav mr-auto">
           <li
             className={`nav-item ${router.pathname === "/basic" && "active"}`}
@@ -70,8 +63,8 @@ const Header = () => {
             Log in
           </button>
         </div>
-      </div>
-    </nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
