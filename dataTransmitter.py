@@ -12,8 +12,6 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://ambient-assistant-living.firebaseio.com/'
 })
 
-# TODO: Add conditions based on the topic
-
 
 def on_message(client, userdata, message):
     topic = message.topic
