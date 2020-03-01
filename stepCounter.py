@@ -1,12 +1,11 @@
 import paho.mqtt.client as mqtt
-import random
+
 
 def on_message(client, userdata, message):
     print(message.payload.decode())
     # Publishing to datatransmitter
-    client.publish("dt/step_count", "Step count: "+str(random.choice(sList)))
+    client.publish("dt/step_count", message.payload.decode())
 
-sList = [800, 900, 1000]
 
 client = mqtt.Client()
 client.on_message = on_message

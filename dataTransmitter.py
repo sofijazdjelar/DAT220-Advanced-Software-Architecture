@@ -21,10 +21,17 @@ def on_message(client, userdata, message):
     if topic in ('dt/door_lock', 'dt/window_lock'):
         m_decode = str(message.payload.decode("utf-8", "ignore"))
         m_in = json.loads(m_decode)
-        ref = db.reference(topic)
+        ref = db.reference('gandalf_123/security/'+topic)
         child = ref.child(m_in["id"])
-        time.sleep(1)
+        # time.sleep(1)
         child.update(m_in)
+    elif topic in ('dt/glucose_level', 'dt/step_count', 'dt/heart_rate'):
+        m_decode = str(message.payload.decode("utf-8", "ignore"))
+        m_in = json.loads(m_decode)
+        date = time.strftime('%Y%m%d')
+        ref = db.reference('gandalf_123/medical/'+topic+'/'+date)
+        # time.sleep(1)
+        ref.push(m_in)
 
 
 client = mqtt.Client()
