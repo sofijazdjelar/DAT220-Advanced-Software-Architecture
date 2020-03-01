@@ -8,13 +8,12 @@ const Security = () => {
   const [locks, setLocks] = useState([]);
 
   useEffect(() => {
-    let ref = Firebase.database().ref("/dt");
+    let ref = Firebase.database().ref("gandalf_123/security"); // TODO: Change to inhabitant object
     ref.on(
       "value",
       snapshot => {
         const data = snapshot.val();
-        console.log("data", data);
-        setLocks(data);
+        setLocks(data?.dt);
       },
       error => {
         console.log(error);
@@ -30,7 +29,7 @@ const Security = () => {
             <Card>
               <Card.Header as="h3">Doors</Card.Header>
               <Card.Body>
-                {locks.door_lock ? (
+                {locks?.door_lock ? (
                   <Container>
                     {locks.door_lock?.map(door => (
                       <Row key={`door-${door?.id}`}>
@@ -48,7 +47,7 @@ const Security = () => {
             <Card>
               <Card.Header as="h3">Windows</Card.Header>
               <Card.Body>
-                {locks.window_lock ? (
+                {locks?.window_lock ? (
                   <Container>
                     {locks.window_lock?.map(window => (
                       <Row key={`window-${window?.id}`}>
