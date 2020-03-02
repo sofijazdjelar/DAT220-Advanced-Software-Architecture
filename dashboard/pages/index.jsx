@@ -21,7 +21,7 @@ const Index = () => {
 
   const renderLayout = () => (
     <Layout>
-      <Jumbotron style={{ margin: 16 }}>
+      <Jumbotron style={{ margin: 16, overflowWrap: "break-word" }}>
         <h1 className="display-4">Hello, {auth?.currentUser?.email}!</h1>
         <p className="lead">
           This is the dashboard for the Ambient Assisted Living viewing the
@@ -42,7 +42,7 @@ const Index = () => {
         className="justify-content-md-center"
         style={{ marginTop: 16 }}
       >
-        <Card style={{ padding: 16 }} fluid>
+        <Card style={{ padding: 16 }}>
           <Form onSubmit={handleSignIn}>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>

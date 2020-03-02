@@ -1,28 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Image, Row, Container } from "react-bootstrap";
 import Layout from "../components/layout";
 import withAuth from "../components/auth";
-
-const uploadedImages = [
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg",
-  "./images/old_person.jpg"
-];
+import { storage } from "../config";
 
 const Photos = () => {
-  const [addedImages, setAddedImages] = useState([]);
+  const [list, setList] = useState([]);
+  const [urls, setUrls] = useState([]);
+
+  useEffect(() => {
+    storage
+      .ref("images")
+      .listAll()
+      .then(list => setList([...list.items]));
+  }, []);
+
+  useEffect(() => {
+    list.forEach(item => {
+      console.log(item);
+      storage
+        .ref("images")
+        .child(item.name)
+        .getDownloadURL()
+        .then(url => {
+          setUrls([...urls, url]);
+        });
+    });
+  }, [list]);
 
   const addImage = e => {
     e.preventDefault();
-    const name = e.target.files[0].name;
+    const imageFile = e.target.files[0];
+    const imageName = imageFile.name;
 
-    setAddedImages([...addedImages, `./images/${name}`]);
+    const uploadTask = storage.ref(`/images/${imageName}`).put(imageFile);
+
+    uploadTask.on(
+      "state_changed",
+      snapShot => {
+        console.log(snapShot);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(imageName)
+          .getDownloadURL()
+          .then(fireBaseUrl => {
+            setUrls([...urls, fireBaseUrl]);
+          });
+      }
+    );
+
     e.target.value = "";
   };
 
@@ -33,8 +64,14 @@ const Photos = () => {
         <Card style={{ marginTop: 16 }}>
           <Container fluid style={{ padding: 16 }}>
             <Row noGutters>
-              {[...uploadedImages, ...addedImages].map(src => (
-                <Image src={src} width={200} />
+              {urls.map((url, index) => (
+                <Image
+                  src={url}
+                  width={400}
+                  height={400}
+                  style={{ objectFit: "cover" }}
+                  key={`image-${index}`}
+                />
               ))}
             </Row>
           </Container>
