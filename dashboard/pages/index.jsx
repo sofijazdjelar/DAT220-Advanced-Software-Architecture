@@ -32,9 +32,17 @@ const Index = () => {
   );
 
   const renderUnauthorizedLayout = () => (
-    <Container fluid>
-      <Row xs={12} sm={4}>
-        <Card style={{ padding: 16 }}>
+    <Container fluid style={{ paddingTop: 16 }}>
+      <Row xs={12} sm={4} className="justify-content-md-center">
+        <h1>Welcome to the AAL system</h1>
+      </Row>
+      <Row
+        xs={12}
+        sm={4}
+        className="justify-content-md-center"
+        style={{ marginTop: 16 }}
+      >
+        <Card style={{ padding: 16 }} fluid>
           <Form onSubmit={handleSignIn}>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>
