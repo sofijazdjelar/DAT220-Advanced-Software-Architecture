@@ -18,12 +18,14 @@ const Medical = ({}) => {
     const dataArray = todaysData && Object.entries(todaysData);
 
     const formattedData = dataArray?.map((value, index) => {
-      const hour = moment(parseFloat(value[1].time) * 1000).format("HH");
+      const hour = moment(parseFloat(value[1].time), "YYYYMMDDHH").format(
+        "HH:mm"
+      );
       const yValue = value[1][yAxis];
 
       return {
         [yAxis]: yValue,
-        hour: index
+        hour
       };
     });
 
