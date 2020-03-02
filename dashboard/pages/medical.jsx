@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import ResponsiveLineChart from "../components/responsive-line-chart";
 import { firebase } from "../config";
 import moment from "moment";
+import withAuth from "../components/auth";
 
 const Medical = ({}) => {
   const [steps, setSteps] = useState([]);
@@ -33,7 +34,7 @@ const Medical = ({}) => {
   };
 
   useEffect(() => {
-    let ref = firebase.database().ref("gandalf_123/medical"); // TODO: Change to inhabitant object
+    let ref = firebase.database().ref("gandalf_123/medical");
     ref.on(
       "value",
       snapshot => {
@@ -103,4 +104,4 @@ const Medical = ({}) => {
   );
 };
 
-export default Medical;
+export default withAuth(Medical);

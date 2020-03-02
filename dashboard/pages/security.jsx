@@ -3,6 +3,7 @@ import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
 import Lock from "../components/lock";
 import Layout from "../components/layout";
 import { firebase } from "../config";
+import withAuth from "../components/auth";
 
 const Security = () => {
   const [locks, setLocks] = useState([]);
@@ -67,4 +68,4 @@ const Security = () => {
   );
 };
 
-export default Security;
+export default withAuth(Security);

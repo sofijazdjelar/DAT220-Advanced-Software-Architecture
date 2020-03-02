@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, Image, Row, Container } from "react-bootstrap";
 import Layout from "../components/layout";
+import withAuth from "../components/auth";
 
 const uploadedImages = [
   "./images/old_person.jpg",
@@ -43,4 +44,4 @@ const Photos = () => {
   );
 };
 
-export default Photos;
+export default withAuth(Photos);

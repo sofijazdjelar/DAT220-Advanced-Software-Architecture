@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card, Container, Image, Row, Col } from "react-bootstrap";
 import Layout from "../components/layout";
 import { firebase } from "../config";
+import withAuth from "../components/auth";
 
 const Basic = ({ data }) => {
   const [info, setInfo] = useState({});
@@ -44,4 +45,4 @@ const Basic = ({ data }) => {
   );
 };
 
-export default Basic;
+export default withAuth(Basic);
