@@ -12,7 +12,7 @@ const Medical = ({}) => {
   const [heart, setHeart] = useState([]);
 
   const formatData = (data, yAxis) => {
-    if (data?.length === 0) return [];
+    if (!data || data.length === 0) return {};
 
     const today = moment().format("YYYYMMDD");
     const todaysData = data[today];
