@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
 import Lock from "../components/lock";
 import Layout from "../components/layout";
-import Firebase from "../config";
+import { firebase } from "../config";
 
 const Security = () => {
   const [locks, setLocks] = useState([]);
 
   useEffect(() => {
-    let ref = Firebase.database().ref("gandalf_123/security"); // TODO: Change to inhabitant object
+    let ref = firebase.database().ref("gandalf_123/security"); // TODO: Change to inhabitant object
     ref.on(
       "value",
       snapshot => {

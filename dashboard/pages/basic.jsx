@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Card, Container, Image, Row, Col } from "react-bootstrap";
 import Layout from "../components/layout";
-import Firebase from "../config";
+import { firebase } from "../config";
 
 const Basic = ({ data }) => {
   const [info, setInfo] = useState({});
 
   useEffect(() => {
-    let ref = Firebase.database().ref("gandalf_123/basic_information"); // TODO: Change to inhabitant object
+    let ref = firebase.database().ref("gandalf_123/basic_information"); // TODO: Change to inhabitant object
     ref.on(
       "value",
       snapshot => {

@@ -9,7 +9,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-const ResponsiveLineChart = ({ data, xAxis, line }) => {
+const ResponsiveLineChart = ({ data, xAxis, line, color }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
@@ -18,7 +18,7 @@ const ResponsiveLineChart = ({ data, xAxis, line }) => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={line} stroke="#82ca9d" />
+        <Line type="monotone" dataKey={line} stroke={color} strokeWidth={4} />
       </LineChart>
     </ResponsiveContainer>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import Layout from "../components/layout";
 import ResponsiveLineChart from "../components/responsive-line-chart";
-import Firebase from "../config";
+import { firebase } from "../config";
 import moment from "moment";
 
 const Medical = ({}) => {
@@ -11,10 +11,13 @@ const Medical = ({}) => {
   const [heart, setHeart] = useState([]);
 
   const formatData = (data, yAxis) => {
-    if (data.length === 0) return [];
+    if (data?.length === 0) return [];
 
     const today = moment().format("YYYYMMDD");
-    const formattedData = Object.entries(data[today]).map((value, index) => {
+    const todaysData = data[today];
+    const dataArray = todaysData && Object.entries(todaysData);
+
+    const formattedData = dataArray?.map((value, index) => {
       const hour = moment(parseFloat(value[1].time) * 1000).format("HH");
       const yValue = value[1][yAxis];
 
@@ -28,7 +31,7 @@ const Medical = ({}) => {
   };
 
   useEffect(() => {
-    let ref = Firebase.database().ref("gandalf_123/medical"); // TODO: Change to inhabitant object
+    let ref = firebase.database().ref("gandalf_123/medical"); // TODO: Change to inhabitant object
     ref.on(
       "value",
       snapshot => {
@@ -61,6 +64,7 @@ const Medical = ({}) => {
                   data={formatData(steps, "steps")}
                   xAxis="hour"
                   line="steps"
+                  color="green"
                 />
               </Card.Body>
             </Card>
@@ -73,6 +77,7 @@ const Medical = ({}) => {
                   data={formatData(glucose, "level")}
                   xAxis="hour"
                   line="level"
+                  color="orange"
                 />
               </Card.Body>
             </Card>
@@ -85,6 +90,7 @@ const Medical = ({}) => {
                   data={formatData(heart, "bpm")}
                   xAxis="hour"
                   line="bpm"
+                  color="red"
                 />
               </Card.Body>
             </Card>
