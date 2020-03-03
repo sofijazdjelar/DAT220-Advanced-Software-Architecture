@@ -14,23 +14,29 @@ firebase_admin.initialize_app(cred, {
 })
 
 
+def parseToJSON(message):
+    m_decode = str(message.payload.decode("utf-8", "ignore"))
+    m_in = json.loads(m_decode)
+    return m_in
+
+
 def on_message(client, userdata, message):
     topic = message.topic
 
     if topic in ('dt/door_lock', 'dt/window_lock'):
-        m_decode = str(message.payload.decode("utf-8", "ignore"))
-        m_in = json.loads(m_decode)
+        json_obj = parseToJSON(message)
         ref = db.reference('gandalf_123/security/'+topic)
-        child = ref.child(m_in["id"])
-        # time.sleep(1)
-        child.update(m_in)
+        child = ref.child(json_obj["id"])
+        child.update(json_obj)
     elif topic in ('dt/glucose_level', 'dt/step_count', 'dt/heart_rate'):
-        m_decode = str(message.payload.decode("utf-8", "ignore"))
-        m_in = json.loads(m_decode)
+        json_obj = parseToJSON(message)
         date = time.strftime('%Y%m%d')
         ref = db.reference('gandalf_123/medical/'+topic+'/'+date)
-        # time.sleep(1)
-        ref.push(m_in)
+        ref.push(json_obj)
+    elif topic == 'dt/face_recog':
+        json_obj = parseToJSON(message)
+        ref = db.reference('/gandalf_123/security/'+topic+'/current_passer')
+        ref.set(json_obj)
 
 
 client = mqtt.Client()
@@ -44,4 +50,5 @@ client.subscribe("dt/window_lock", qos=1)
 client.subscribe("dt/heart_rate", qos=1)
 client.subscribe("dt/step_count", qos=1)
 client.subscribe("dt/glucose_level", qos=1)
+client.subscribe("dt/face_recog", qos=1)
 client.loop_forever()

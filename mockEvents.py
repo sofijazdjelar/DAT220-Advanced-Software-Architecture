@@ -29,4 +29,16 @@ time.sleep(10)
 client.publish("security/door_lock",
                json.dumps({'id': '2', 'isOpen': 'false'}))
 time.sleep(10)
+client.publish("security/face_recog",
+               json.dumps({'id': 'bilbo', 'category': 'friend'}))
+time.sleep(10)
+client.publish("security/face_recog",
+               json.dumps({'id': 'saruman', 'category': 'ex_friend'}))
+time.sleep(10)
+client.publish("security/face_recog",
+               json.dumps({'id': 'cat', 'category': 'animal'}))
+time.sleep(10)
+client.publish("security/face_recog",
+               json.dumps({'id': 'unknown', 'category': 'unknown'}))
+time.sleep(10)
 client.disconnect()

@@ -5,3 +5,5 @@ key.json
 dashboard/node_modules
 dashboard/.next
 dashboard/config.js
+
+.DS_Store
