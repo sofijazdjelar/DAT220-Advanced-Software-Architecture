@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import Layout from "../components/layout";
 import ResponsiveLineChart from "../components/responsive-line-chart";
-import { firebase } from "../config";
+import { database } from "../config";
 import moment from "moment";
 import withAuth from "../components/auth";
 
@@ -18,7 +18,7 @@ const Medical = ({}) => {
     const todaysData = data[today];
     const dataArray = todaysData && Object.entries(todaysData);
 
-    const formattedData = dataArray?.map((value, index) => {
+    const formattedData = dataArray?.map(value => {
       const hour = moment(parseFloat(value[1].time), "YYYYMMDDHH").format(
         "HH:mm"
       );
@@ -34,7 +34,7 @@ const Medical = ({}) => {
   };
 
   useEffect(() => {
-    let ref = firebase.database().ref("gandalf_123/medical");
+    let ref = database.ref("gandalf_123/medical");
     ref.on(
       "value",
       snapshot => {

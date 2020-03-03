@@ -1,6 +1,6 @@
 import { Jumbotron, Container, Row, Button, Form, Card } from "react-bootstrap";
 import Layout from "../components/layout";
-import { auth, firebase } from "../config";
+import { auth } from "../config";
 import router from "next/router";
 
 const Index = () => {

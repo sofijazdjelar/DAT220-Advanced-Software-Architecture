@@ -29,6 +29,16 @@ const Header = () => {
           </a>
         </Link>
       </li>
+      <li
+        className={`nav-item ${router.pathname === "/compositeLogic" &&
+          "active"}`}
+      >
+        <Link href="/compositeLogic">
+          <a title="Composite logic" className="nav-link">
+            Composite Logic
+          </a>
+        </Link>
+      </li>
     </>
   );
 
